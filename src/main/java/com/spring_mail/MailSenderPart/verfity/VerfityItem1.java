@@ -13,8 +13,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
  @Entity
  @Data
- @AllArgsConstructor
- @NoArgsConstructor
  @Table
 public class VerfityItem1 {
 	 @Id
