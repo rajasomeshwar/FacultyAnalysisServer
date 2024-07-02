@@ -2,7 +2,6 @@ package com.spring.spring_security_learn.todo;
 
 import java.time.LocalDate;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

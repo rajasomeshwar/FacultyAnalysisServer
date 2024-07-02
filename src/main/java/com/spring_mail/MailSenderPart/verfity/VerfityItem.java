@@ -26,7 +26,7 @@ public class VerfityItem {
      private LocalDateTime date;
           public VerfityItem()
           {
-        	  
+        	  super();
           }
 		public VerfityItem(int id, String gmail, long code, LocalDateTime date) {
 		super();

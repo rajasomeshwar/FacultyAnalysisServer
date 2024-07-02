@@ -65,7 +65,12 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+		<dependency>
+    <groupId>jakarta.validation</groupId>
+    <artifactId>jakarta.validation-api</artifactId>
+          <!-- Adjust the version as needed -->
+</dependency>
+
 	</dependencies>
 
 	<build>
