@@ -83,6 +83,7 @@ public class VerificationControler {
 				   while(ix<request.length() && request.charAt(ix)!='/') ix++;
 				   stn.append(request.substring(ix));
 				   
-					return stn.toString();
+				//	return stn.toString();
+					return "https://faculty-analysis.vercel.app/";
 				}
 }
