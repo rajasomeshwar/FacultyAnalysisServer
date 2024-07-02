@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
  @AllArgsConstructor
  @NoArgsConstructor
  @Table
-public class VerfityItem {
+public class VerfityItem1 {
 	 @Id
 	  @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
@@ -24,11 +24,11 @@ public class VerfityItem {
      private String email;
      private long code;
      private LocalDateTime date;
-          public VerfityItem()
+          public VerfityItem1()
           {
         	  super();
           }
-		public VerfityItem(int id, String gmail, long code, LocalDateTime date) {
+		public VerfityItem1(int id, String gmail, long code, LocalDateTime date) {
 		super();
 		this.id = id;
 		this.email = gmail;

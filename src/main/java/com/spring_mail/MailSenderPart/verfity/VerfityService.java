@@ -32,7 +32,7 @@ public class VerfityService {
 	public Boolean check(String email, long code) {
 		// TODO Auto-generated method stub
 		System.out.println(code);
-	    VerfityItem details= repo.findByEmail(email);
+	    VerfityItem1 details= repo.findByEmail(email);
 	    var dets=checkOfEmail(email);
 	     System.out.println("xwal s"+dets+" ");
 	     System.out.println("details "+details);
@@ -69,7 +69,7 @@ public class VerfityService {
 		// TODO Auto-generated method stub
        if(isFirst)
        {
-    	   VerfityItem item=new VerfityItem(1,email,1112,LocalDateTime.now().plusMinutes(5));
+    	   VerfityItem1 item=new VerfityItem1(1,email,1112,LocalDateTime.now().plusMinutes(5));
     	   System.out.println(item);
     	   repo.save(item);
        } 
