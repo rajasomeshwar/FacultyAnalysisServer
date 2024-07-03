@@ -119,7 +119,7 @@ public class ForgetPasswordService {
 //	        int y=ix;
 //	        while(ix<request.length() && request.charAt(ix)!='/') ix++;
 			//return request.substring(0,y+1)+"3000"+request.substring(ix,request.length()-7);
-	        return "https://faculty-analysis.vercel.app/auth/verifyEmail";
+	        return "https://faculty-analysis.vercel.app/auth/forgetpassword";
 		}
 	    public void sendForgotPasswordEmail(String url, ApplicationUser theUser) throws MessagingException, UnsupportedEncodingException {
 	    	   String subject = "Password Reset Request";
