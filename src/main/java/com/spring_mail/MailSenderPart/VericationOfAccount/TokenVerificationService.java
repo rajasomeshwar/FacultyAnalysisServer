@@ -101,8 +101,8 @@ public class TokenVerificationService {
 //		   stn.append("3000");
 //		   while(ix<request.length() && request.charAt(ix)!='/') ix++;
 //		   stn.append(request.substring(ix));
-	    	
-			return "https://faculty-analysis-omlv66vuf-rajasomeshwar-s-projects.vercel.app/auth/verifyEmail";
+	    	return "https://faculty-analysis.vercel.app/auth/verifyEmail";
+			//return "https://faculty-analysis-omlv66vuf-rajasomeshwar-s-projects.vercel.app/auth/verifyEmail";
 		}
 	    public void sendVerificationEmail(String url, ApplicationUser theUser) throws MessagingException, UnsupportedEncodingException {
 	        String subject = "Email Verification";
