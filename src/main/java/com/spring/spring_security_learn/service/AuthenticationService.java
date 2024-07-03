@@ -105,7 +105,7 @@ public class AuthenticationService {
     private String rechangeUrl(String request) {
 	
 	   
-		return "http://localhost:3000/auth/verifyEmail";
+		return "https://faculty-analysis.vercel.app/auth/verifyEmail";
 	}
 
 	private boolean sendCodeTomail(String email)
