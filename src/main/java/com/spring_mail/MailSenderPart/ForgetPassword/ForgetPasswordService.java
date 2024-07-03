@@ -106,20 +106,20 @@ public class ForgetPasswordService {
 	    private String EditUrl(String request) {
 			// TODO Auto-generated method stub
 	    	System.out.println("I'm here at Edit url "+request);
-	       int ix=0;
-	    	boolean b=false;
-	    	while(ix<request.length()){
-	    		if(request.charAt(ix)==':')
-	    		{
-	    			if(b) break;
-	    			b=true;
-	    		}
-	    		ix++;
-	    	}
-	        int y=ix;
-	        while(ix<request.length() && request.charAt(ix)!='/') ix++;
+//	       int ix=0;
+//	    	boolean b=false;
+//	    	while(ix<request.length()){
+//	    		if(request.charAt(ix)==':')
+//	    		{
+//	    			if(b) break;
+//	    			b=true;
+//	    		}
+//	    		ix++;
+//	    	}
+//	        int y=ix;
+//	        while(ix<request.length() && request.charAt(ix)!='/') ix++;
 			//return request.substring(0,y+1)+"3000"+request.substring(ix,request.length()-7);
-	        return "https://faculty-analysis.vercel.app/";
+	        return "https://faculty-analysis.vercel.app/auth/verifyEmail";
 		}
 	    public void sendForgotPasswordEmail(String url, ApplicationUser theUser) throws MessagingException, UnsupportedEncodingException {
 	    	   String subject = "Password Reset Request";

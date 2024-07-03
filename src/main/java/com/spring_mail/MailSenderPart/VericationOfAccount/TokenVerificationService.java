@@ -90,19 +90,19 @@ public class TokenVerificationService {
 	    private String EditUrl(String request) {
 			// TODO Auto-generated method stub
 	    	// TODO Auto-generated method stub
-			int ix=0;
-			// to do static ;
-			boolean b=false;
-		   for(;ix<request.length();ix++) if(request.charAt(ix)==':') {
-			   if(b) break;
-			   b=true;
-		   }
-		   StringBuilder stn=new StringBuilder(request.substring(0, ix+1));
-		   stn.append("3000");
-		   while(ix<request.length() && request.charAt(ix)!='/') ix++;
-		   stn.append(request.substring(ix));
+//			int ix=0;
+//			// to do static ;
+//			boolean b=false;
+//		   for(;ix<request.length();ix++) if(request.charAt(ix)==':') {
+//			   if(b) break;
+//			   b=true;
+//		   }
+//		   StringBuilder stn=new StringBuilder(request.substring(0, ix+1));
+//		   stn.append("3000");
+//		   while(ix<request.length() && request.charAt(ix)!='/') ix++;
+//		   stn.append(request.substring(ix));
 	    	
-			return stn.toString();
+			return "https://faculty-analysis-omlv66vuf-rajasomeshwar-s-projects.vercel.app/auth/verifyEmail";
 		}
 	    public void sendVerificationEmail(String url, ApplicationUser theUser) throws MessagingException, UnsupportedEncodingException {
 	        String subject = "Email Verification";
