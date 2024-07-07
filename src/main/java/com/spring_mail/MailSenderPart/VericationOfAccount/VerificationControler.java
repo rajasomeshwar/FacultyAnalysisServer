@@ -72,18 +72,18 @@ public class VerificationControler {
 				 
 				private String rechangeUrl(String request) {
 					// TODO Auto-generated method stub
-//					int ix=0;
-//					boolean b=false;
-//				   for(;ix<request.length();ix++) if(request.charAt(ix)==':') {
-//					   if(b) break;
-//					   b=true;
-//				   }
-//				   StringBuilder stn=new StringBuilder(request.substring(0, ix+1));
-//				   stn.append("3000");
-//				   while(ix<request.length() && request.charAt(ix)!='/') ix++;
-//				   stn.append(request.substring(ix));
+					int ix=0;
+					boolean b=false;
+				   for(;ix<request.length();ix++) if(request.charAt(ix)==':') {
+					   if(b) break;
+					   b=true;
+				   }
+				   StringBuilder stn=new StringBuilder(request.substring(0, ix+1));
+				   stn.append("3000");
+				   while(ix<request.length() && request.charAt(ix)!='/') ix++;
+				   stn.append(request.substring(ix));
 				   
-				//	return stn.toString();
-					return "https://faculty-analysis.vercel.app/";
+					return stn.toString();
+					//return "https://faculty-analysis.vercel.app/";
 				}
 }

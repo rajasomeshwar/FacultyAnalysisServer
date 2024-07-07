@@ -20,6 +20,11 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -30,6 +35,8 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.spring.spring_security_learn.util.RSAKeyProperties;
 
 import static org.springframework.security.config.Customizer.withDefaults;
+
+import java.util.Arrays;
 
 @Configuration
 public class SecurityConfiguration {
@@ -61,8 +68,12 @@ public class SecurityConfiguration {
                 auth.requestMatchers("/auth/**").permitAll();
                 auth.requestMatchers("/admin/**").hasRole("ADMIN");
                 auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
+                auth.requestMatchers("/T/**").permitAll();
+                auth.requestMatchers("/SC/**").permitAll();
+                auth.requestMatchers("/D/**").permitAll();
                 auth.requestMatchers("/users/**").authenticated();
                 auth.anyRequest().authenticated();
+                
             });
             
         http.oauth2ResourceServer()
@@ -74,6 +85,34 @@ public class SecurityConfiguration {
                 
         return http.build();
     }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                    .allowedOrigins("http://localhost:3000") // Allow requests from localhost:3000
+//                    .allowedMethods("GET", "POST", "PUT", "DELETE") // Allow these HTTP methods
+//                    .allowedHeaders("*") // Allow all headers
+//                    .allowCredentials(true); // Allow cookies and authentication headers
+//            }
+//        };
+//    }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Specify the allowed origins
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Specify allowed HTTP methods
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // Specify allowed request headers
+        configuration.setAllowCredentials(true); // Allow cookies and authentication headers
+        
+        // Create a source for the CORS configuration
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration); // Apply CORS configuration to all paths
+        
+        return source;
+    }
 
     @Bean
     public JwtDecoder jwtDecoder(){
@@ -84,7 +123,7 @@ public class SecurityConfiguration {
     public JwtEncoder jwtEncoder(){
         JWK jwk = new RSAKey.Builder(keys.getPublicKey()).privateKey(keys.getPrivateKey()).build();
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-        return new NimbusJwtEncoder(jwks);
+        return new NimbusJwtEncoder(jwks); 
     }
 
     @Bean

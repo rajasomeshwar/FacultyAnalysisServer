@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.profileAnalysisTables.FacultyInfo.FacultyInformationRepo;
+import com.profileAnalysisTables.FacultyInfo.FacultyInformationT;
 import com.spring.spring_security_learn.exception.InvalidEmailException;
 import com.spring.spring_security_learn.exception.UserAlreadyExists;
 import com.spring.spring_security_learn.exception.UserNotFoundException;
@@ -44,7 +46,7 @@ public class AuthenticationService {
 
   
     private final RoleRepository roleRepository;
-
+    private final FacultyInformationRepo InfoFacultyRepository;
   
     private PasswordEncoder passwordEncoder;
 
@@ -56,7 +58,7 @@ public class AuthenticationService {
 @Autowired
     public AuthenticationService(UserRepository userRepository, RoleRepository roleRepository,
 			PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenService tokenService,VerfityService sendermail,
-			TokenVerificationService tokenVerificationService) {
+			TokenVerificationService tokenVerificationService,FacultyInformationRepo InfoFacultyRepository) {
 		super();
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
@@ -65,12 +67,16 @@ public class AuthenticationService {
 		this.tokenService = tokenService;
 		this.sendermail=sendermail;
 		this.tokenVerificationService=tokenVerificationService;
+	     this.InfoFacultyRepository=InfoFacultyRepository;
 	}
 
-	public String registerUser(String username, String password){
+	public String registerUser(String username, String password,String mobileNo,FacultyInformationT data){
          if(!isEmailValid(username))
          {
         	 throw new InvalidEmailException("Please enter valid email");
+         }
+         if(data==null) {
+        	 throw new InvalidEmailException("Invalid data fields");
          }
     	// check if exists;
     	System.out.println("her ");
@@ -84,8 +90,11 @@ public class AuthenticationService {
         {
         	throw new UserAlreadyExists("Email is already exists ");
         }
-        var userdetails= userRepository.save(new ApplicationUser(0, username, encodedPassword, authorities));
+        
+        ApplicationUser userdetails= userRepository.save(new ApplicationUser(0, username, encodedPassword,mobileNo, false, authorities,data)); 
       // boolean isSent= sendCodeTomail(username);
+        // add more info
+       
         
        boolean bylink=sendLinkTomail(username);
         if(bylink) {
@@ -105,7 +114,8 @@ public class AuthenticationService {
     private String rechangeUrl(String request) {
 	
 	   
-		return "https://faculty-analysis.vercel.app/auth/verifyEmail";
+		return "http://localhost:3000/auth/verifyEmail";
+		//return "https://faculty-analysis.vercel.app/auth/verifyEmail";
 	}
 
 	private boolean sendCodeTomail(String email)
@@ -130,7 +140,9 @@ public class AuthenticationService {
               {
              	 throw new InvalidEmailException("Please enter valid email");
               }
-        	System.out.println(" her login serivce");
+        	System.out.println(" her login serivce"); 
+        	System.out.println(username);
+        	//System.out.println("z "+userRepository.findAll());
         	var user=userRepository.findByUsergmail(username).orElse(null);
         	System.out.println(" her login serivce"+user);
         	if(user==null)
